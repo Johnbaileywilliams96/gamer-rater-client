@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 
 export const GameList = () => {
     const [games, setGames] = useState([])
@@ -23,9 +24,12 @@ export const GameList = () => {
             })
     }
 
+  
     useEffect(() => {
         fetchGames()
     }, [])
+
+    console.log(games)
 
     return (
         <div className="p-4">
@@ -40,8 +44,16 @@ export const GameList = () => {
                             key={`game-${game.id}`} 
                             className="border p-5 border-solid hover:bg-fuchsia-500 hover:text-violet-50 rounded-md border-violet-900 bg-slate-50"
                         >
+                            <Link to={`/gameDetails/${game.id}`}>
                             <h2 className="text-xl font-bold mb-2">{game.title}</h2>
+                            </Link>
                             <p>{game.description}</p>
+                            <div className="mt-2">
+                                {/* <p className="font-semibold">Categories: </p>
+                                <p>
+                                    {game.categories.map(category => category.name).join(", ")}
+                                </p> */}
+                            </div>
                         </div>
                     ))}
                 </div>
